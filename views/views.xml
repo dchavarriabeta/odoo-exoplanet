@@ -1,0 +1,89 @@
+<odoo>
+  <data>
+
+    <record id="action_exoplanet" model="ir.actions.act_window">
+      <field name="name">Exoplanet</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">exoplanet.planets</field>
+      <field name="view_mode">tree,form,graph</field>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+          Esto se muestra porque no hay datos precargados
+        </p>
+        <p>
+          dkvmfjbiuerg
+        </p>
+      </field>
+    </record>
+
+    <record id="exoplanet_graph_view" model="ir.ui.view">
+      <field name="name">exoplanet.graph.view</field>
+      <field name="model">exoplanet.planets</field>
+      <field name="arch" type="xml">
+        <graph string="Planets_graph">
+          <field name="koi_name"/>
+          <field name="koi_disposition" />
+        </graph>
+      </field>
+    </record>
+
+    <record id="view_exoplanet_tree" model="ir.ui.view">
+      <field name="name">view.exoplanet.tree</field>
+      <field name="model">exoplanet.planets</field>
+      <field name="arch" type="xml">
+        <tree string="Planets">
+          <field name="koi_name"/>
+          <field name="koi_disposition"/>
+          <field name="koi_insol"/>
+          <field name="koi_prad"/>
+        </tree>
+      </field>
+    </record>
+    <!--<record id="view_exoplanet_tree" model="ir.ui.view">
+      <field name="name">view.exoplanet.tree</field>
+      <field name="model">exoplanet.planets</field>
+      <field name="arch" type="xml">
+        <tree string="Planets">
+          <field name="unit_price"/>
+        </tree>
+      </field>
+    </record>-->
+
+    <record id="wizard_import_file_view" model="ir.ui.view">
+      <field name="name">Import new file</field>
+      <field name="model">exoplanet_upload_file</field>
+      <field name="arch" type="xml">
+
+        <!--Upload file component-->
+        <form>
+          <group>
+            <field name="upload_file" filename="file_name" />
+            <field name="file_name" invisible="1" />
+          </group>
+          <!--Cancel controls-->
+          <footer>
+            <button name="import_file" string="Import" class="oe_right oe_highlight" type="object" />
+            <button special="cancel" string="Cancel" class="oe_right" />
+          </footer>
+        </form>
+
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="exoplanet_upload_file_wizard">
+      <field name="name">Importar fichero</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">exoplanet_upload_file</field>
+      <field name="view_id" ref="wizard_import_file_view"/>
+      <field name="view_mode">form</field>
+      <field name="target">new</field>
+    </record>
+
+    <!--Menu item header-->
+    <menuitem name="Exoplanet" id="exoplanet.menu_root" sequence="10" action="action_exoplanet"/>
+    <!--Memu item second level-->
+    <menuitem name="Import new file" id="exoplanet.menu_import_file" parent="exoplanet.menu_root" sequence="0" action="exoplanet_upload_file_wizard"/>
+    <!--Memu item third level-->
+    <!--<menuitem name="Visitas" id="exoplanet.menu" parent="exoplanet.menu_categ" sequence="0" action="action_exoplanet"/>-->
+  </data>
+</odoo>
